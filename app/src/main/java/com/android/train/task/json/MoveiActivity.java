@@ -37,10 +37,17 @@ public class MoveiActivity extends AppCompatActivity {
         final TextView txtLanguage = findViewById(R.id.txtLanguage);
 
         AsyncHttpClient client = new AsyncHttpClient();
+
+
+
         client.get(address, new  JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
+
+                ////////DataBase////////////
+                TestDataBase db=new TestDataBase(MoveiActivity.this,"MovieDB",null,1);
+                ///////////////////////////
 
                 Gson gson = new Gson();
                 Properties properti = gson.fromJson(response.toString(), Properties.class);
@@ -55,6 +62,11 @@ public class MoveiActivity extends AppCompatActivity {
 
                 String imageUrl = properti.getPoster();
                 Picasso.get().load(imageUrl).into(imgPoster);
+
+                ///////////InsertDB////////////////
+                db.insertFilm(properti.getTitle(),properti.getYear(),properti.getDirector(),properti.getGenre()
+                ,properti.getCountry(),properti.getLanguage(),properti.getActors());
+                ///////////////////////////////////
             }
 
             @Override

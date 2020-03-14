@@ -15,6 +15,8 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 public class Json2RecylcerAcc extends AppCompatActivity {
@@ -28,11 +30,27 @@ public class Json2RecylcerAcc extends AppCompatActivity {
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
 
+        if (title == "Local"){
+
+            ////////DataBase////////////
+            TestDataBase db=new TestDataBase(Json2RecylcerAcc.this,"MovieDB",null,1);
+            ///////////////////////////
+            java.util.List<String> arraytitle = new ArrayList<String>();
+            arraytitle = db.GetFilmName();
+
+            RecyclerView movieRecyclerLocal = findViewById(R.id.moviesRecycler);
+
+
+
+        }
+        else {
+
         String address = "https://www.omdbapi.com/?s="+title+"&apikey=70ad462a";
 
         AsyncHttpClient client = new AsyncHttpClient();
 
         client.get(address, new JsonHttpResponseHandler(){
+
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -60,5 +78,6 @@ public class Json2RecylcerAcc extends AppCompatActivity {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
+    }
     }
 }

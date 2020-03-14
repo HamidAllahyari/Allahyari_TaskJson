@@ -19,12 +19,21 @@
         android:textSize="20sp"
         />
     <Button
+    android:layout_marginTop="15dp"
+    android:id="@+id/btnSubmit"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:text="Network Search"
+    />
+    <Button
         android:layout_marginTop="15dp"
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnlocal"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="Local Search"
         />
+
+
 
 
 
